@@ -1,0 +1,49 @@
+# Sprite 处理器默认配置
+
+# 默认处理配置
+default:
+  target_size: [64, 64]      # 目标尺寸 [宽，高]
+  remove_bg: true             # 是否去除白色背景
+  bg_threshold: 240           # 背景亮度阈值 (0-255)
+  center_anchor: true         # 是否居中对齐
+  filter_mode: point          # 过滤模式：point/linear
+  format: png                 # 输出格式
+
+# 角色 Sprite 配置
+character:
+  target_size: [64, 64]
+  remove_bg: true
+  bg_threshold: 240
+  center_anchor: true
+  # 动画帧配置
+  animation:
+    idle_frames: 4
+    run_frames: 8
+    jump_frames: 4
+    attack_frames: 6
+
+# 瓦片集配置
+tileset:
+  grid_size: [32, 32]        # 网格大小
+  auto_slice: true            # 自动切割
+  generate_rules: true        # 生成自动瓦片规则
+
+# 物品图标配置
+item:
+  target_size: [32, 32]
+  remove_bg: true
+  bg_threshold: 240
+  center_anchor: true
+
+# 背景配置
+background:
+  target_size: [512, 512]
+  remove_bg: false
+  filter_mode: linear         # 背景用线性过滤
+
+# UI 元素配置
+ui:
+  target_size: [64, 64]
+  remove_bg: true
+  bg_threshold: 250           # UI 背景更严格
+  center_anchor: false        # UI 元素通常左上角对齐

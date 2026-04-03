@@ -1,0 +1,41 @@
+# Unity
+[Ll]ibrary/
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+*.pidb.meta
+*.pdb.meta
+*.mdb.meta
+*.unitypackage.meta
+sysinfo.txt
+*.apk
+*.aab
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vs/
+.idea/
+*.swp
+*.swo
+*~
+
+# Test
+test_input/
+test_output/
+__pycache__/
+*.pyc
+
+# Framework specific
+auto-import/*
+!auto-import/.gitkeep
+
+# Build output
+Builds/
+hotfix_*/
+*.zip
