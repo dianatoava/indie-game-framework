@@ -1,0 +1,30 @@
+# SVG 编辑器配置
+
+# 导出设置
+export:
+  format: png           # svg | png | both
+  default-size: [512, 512]
+  background: transparent
+  dpi: 96
+
+# 自动处理
+auto-process: true
+output-dir: ../../auto-import/svg/
+
+# 批量处理
+batch:
+  enabled: false
+  input-dir: ./raw-svg/
+  output-dir: ./processed/
+  sizes:
+    - [32, 32]      # 图标
+    - [64, 64]      # 小图
+    - [128, 128]    # 中图
+    - [256, 256]    # 大图
+    - [512, 512]    # 高清
+
+# 与 Sprite Processor 集成
+sprite-processor:
+  enabled: true
+  profile: ui        # 使用哪个处理 profile
+  auto-trigger: true # 导出后自动触发处理

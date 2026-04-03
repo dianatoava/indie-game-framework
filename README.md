@@ -83,6 +83,7 @@ cp -r templates/project/* ../MyGame/
 |------|------|------|
 | sprite-processor | AI 图片自动处理 | ❌ |
 | data-config | 数据驱动配置 | ❌ |
+| svg-editor | SVG 矢量图编辑器 | ❌ |
 | cli | 命令行工具 | ❌ |
 | debug-tools | 调试工具 | ❌ |
 

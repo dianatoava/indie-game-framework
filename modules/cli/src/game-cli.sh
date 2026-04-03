@@ -39,6 +39,8 @@ print_help() {
     echo "  hotfix               生成热更包"
     echo "  sync                 同步多设备"
     echo "  clean                清理构建文件"
+    echo "  svg-editor           启动 SVG 编辑器"
+    echo "  svg-convert          转换 SVG 到 PNG"
     echo "  help                 显示帮助"
     echo ""
     echo "示例:"
@@ -395,6 +397,12 @@ main() {
         clean)
             cmd_clean "$@"
             ;;
+        svg-editor)
+            cmd_svg_editor "$@"
+            ;;
+        svg-convert)
+            cmd_svg_convert "$@"
+            ;;
         help|--help|-h)
             print_help
             ;;
@@ -405,6 +413,74 @@ main() {
             exit 1
             ;;
     esac
+}
+
+# 启动 SVG 编辑器
+cmd_svg_editor() {
+    echo -e "${BLUE}Starting SVG Editor...${NC}"
+    
+    local launch_script="$FRAMEWORK_DIR/modules/svg-editor/tools/launch-editor.sh"
+    
+    if [ -f "$launch_script" ]; then
+        "$launch_script" "$@"
+    else
+        echo -e "${RED}SVG Editor not found${NC}"
+        echo "Please check: $launch_script"
+        exit 1
+    fi
+}
+
+# 转换 SVG 到 PNG
+cmd_svg_convert() {
+    echo -e "${BLUE}Converting SVG to PNG...${NC}"
+    
+    local input_file=""
+    local output_file=""
+    local size=""
+    
+    while [[ $# -gt 0 ]]; do
+        case $1 in
+            --output|-o)
+                output_file="$2"
+                shift 2
+                ;;
+            --size|-s)
+                size="$2"
+                shift 2
+                ;;
+            *)
+                if [ -z "$input_file" ]; then
+                    input_file="$1"
+                fi
+                shift
+                ;;
+        esac
+    done
+    
+    if [ -z "$input_file" ]; then
+        echo -e "${RED}Error: Please specify input SVG file${NC}"
+        echo "Usage: game-cli svg-convert <input.svg> [--output output.png] [--size 512x512]"
+        exit 1
+    fi
+    
+    local convert_script="$FRAMEWORK_DIR/modules/svg-editor/tools/svg-to-png.py"
+    
+    if [ -f "$convert_script" ]; then
+        local args=("$input_file")
+        
+        if [ -n "$output_file" ]; then
+            args+=("--output" "$output_file")
+        fi
+        
+        if [ -n "$size" ]; then
+            args+=("--size" "$size")
+        fi
+        
+        python3 "$convert_script" "${args[@]}"
+    else
+        echo -e "${RED}Converter not found${NC}"
+        exit 1
+    fi
 }
 
 main "$@"
